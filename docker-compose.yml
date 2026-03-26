@@ -1,0 +1,24 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=15d
+    network_mode: host
+    volumes:
+      - ./mounts/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    restart: unless-stopped
+
+  postgres-exporter:
+    image: quay.io/prometheuscommunity/postgres-exporter
+    environment:
+      DATA_SOURCE_URI: "${DB_HOST:-localhost}:${DB_PORT:-5433}/${DB_NAME:-postgres}?sslmode=disable"
+      DATA_SOURCE_USER: ${DB_USER:-waymark}
+      DATA_SOURCE_PASS: ${DB_PASS:-waymark}
+    network_mode: host
+    restart: unless-stopped
+
+volumes:
+  prometheus_data:

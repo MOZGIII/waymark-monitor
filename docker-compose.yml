@@ -30,6 +30,7 @@ services:
     network_mode: host
     volumes:
       - ./mounts/grafana-provisioning/:/etc/grafana/provisioning:ro
+      - ./mounts/grafana-dashboards/:/dashboards:ro
       - grafana_data:/var/lib/grafana
     restart: unless-stopped
 

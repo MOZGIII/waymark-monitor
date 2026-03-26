@@ -20,6 +20,16 @@ services:
     network_mode: host
     restart: unless-stopped
 
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    command:
+      - "--path.rootfs=/host"
+    network_mode: host
+    pid: host
+    volumes:
+      - "/:/host:ro,rslave"
+    restart: unless-stopped
+
   grafana:
     image: grafana/grafana
     environment:

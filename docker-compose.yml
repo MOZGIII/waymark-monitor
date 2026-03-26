@@ -20,6 +20,13 @@ services:
     network_mode: host
     restart: unless-stopped
 
+  pg-exporter:
+    image: pgsty/pg_exporter
+    environment:
+      PG_EXPORTER_URL: "postgres://${DB_USER:-waymark}:${DB_PASS:-waymark}@${DB_HOST:-localhost}:${DB_PORT:-5433}/${DB_NAME:-postgres}"
+    network_mode: host
+    restart: unless-stopped
+
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
     command:

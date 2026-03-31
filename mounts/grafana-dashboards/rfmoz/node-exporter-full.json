@@ -56,6 +56,27 @@
           "type": "dashboard"
         },
         "type": "dashboard"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": false,
+        "iconColor": "red",
+        "name": "Waymark",
+        "target": {
+          "expr": "",
+          "interval": "",
+          "limit": 500,
+          "matchAny": true,
+          "refId": "Anno",
+          "tags": [
+            "waymark"
+          ],
+          "type": "tags"
+        }
       }
     ]
   },

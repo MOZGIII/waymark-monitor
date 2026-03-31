@@ -30,7 +30,36 @@ services:
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
     command:
-      - "--path.rootfs=/host"
+      - --path.rootfs=/host
+
+      # Core collectors
+      - "--collector.cpu"
+      - "--collector.loadavg"
+      - "--collector.meminfo"
+      - "--collector.vmstat"
+      - "--collector.time"
+      - "--collector.uname"
+
+      # Disk / filesystem
+      - "--collector.filesystem"
+      - "--collector.diskstats"
+      - "--collector.filesystem.mount-points-exclude=^/(dev|proc|sys|run|var/lib/docker/.+|var/lib/containerd/.+)($|/)"
+      - "--collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$"
+
+      # Network
+      - "--collector.netdev"
+      - "--collector.netclass"
+      - "--collector.netstat"
+      - "--collector.tcpstat"
+
+      # System / processes
+      - "--collector.systemd"
+      - "--collector.processes"
+      - "--collector.cgroups"
+
+      # Disable noisy collectors
+      - "--no-collector.wifi"
+      - "--no-collector.hwmon"
     network_mode: host
     pid: host
     volumes:

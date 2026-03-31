@@ -66,6 +66,21 @@ services:
       - "/:/host:ro,rslave"
     restart: unless-stopped
 
+  cadvisor:
+    image: ghcr.io/google/cadvisor:0.56.2
+    command:
+      - --port=18080
+    network_mode: host
+    userns_mode: host
+    pid: host
+    privileged: true
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    restart: unless-stopped
+
   grafana:
     image: grafana/grafana
     environment:

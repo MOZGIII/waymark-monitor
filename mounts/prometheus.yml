@@ -10,6 +10,9 @@ scrape_configs:
   - job_name: pg
     static_configs:
       - targets: ["localhost:9630"]
+  - job_name: pg-nbari
+    static_configs:
+      - targets: ["localhost:9432"]
   - job_name: node
     static_configs:
       - targets: ["localhost:9100"]

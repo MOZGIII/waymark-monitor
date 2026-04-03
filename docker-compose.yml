@@ -99,6 +99,7 @@ services:
     pid: host
     volumes:
       - "/:/host:ro,rslave"
+      - "/var/run/dbus:/var/run/dbus:ro,rslave"
     restart: unless-stopped
 
   cadvisor:

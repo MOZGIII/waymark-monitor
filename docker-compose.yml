@@ -13,6 +13,14 @@ services:
 
   postgres-exporter:
     image: quay.io/prometheuscommunity/postgres-exporter
+    command:
+      - --collector.locks
+      - --collector.database
+      - --collector.stat
+      - --collector.replication
+      - --collector.index
+      - --collector.statements
+      - --collector.exporter
     environment:
       DATA_SOURCE_URI: "${DB_HOST:-localhost}:${DB_PORT:-5433}/${DB_NAME:-postgres}?sslmode=disable"
       DATA_SOURCE_USER: ${DB_USER:-waymark}

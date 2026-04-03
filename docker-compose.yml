@@ -96,6 +96,9 @@ services:
       - "--no-collector.hwmon"
     network_mode: host
     pid: host
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
     volumes:
       - "/:/host:ro,rslave"
       - "/var/run/dbus:/var/run/dbus:ro,rslave"

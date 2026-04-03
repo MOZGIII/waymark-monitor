@@ -32,7 +32,6 @@ services:
       - --collector.statio_user_indexes
       - --collector.statio_user_tables
       - --collector.wal
-      - --collector.xlog_location
     environment:
       DATA_SOURCE_URI: "${DB_HOST:-localhost}:${DB_PORT:-5433}/${DB_NAME:-postgres}?sslmode=disable"
       DATA_SOURCE_USER: ${DB_USER:-waymark}
